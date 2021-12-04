@@ -47,7 +47,7 @@
   (map (λ (board) (mark-board board number)) boards))
 
 (define (all-winners? lst) ; check if all pairs in the list are #t
-  (all? (λ (x) (match x ([cons _ on] on))) lst))
+  (all? cdr lst))
 
 (define (is-winner? board) ; check if any row or column in the board is a winner
   (let ([cols (transpose board)])
