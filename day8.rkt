@@ -22,17 +22,7 @@ part1
 ; part 2
 
 ; Can we just count the number of times a segment appears?
-; From the example:
-;
-; a = 8
-; b = 6
-; c = 8 * dup
-; d = 7
-; e = 4
-; f = 9
-; g = 7 * dup again
-;
-; So no. But it's still helpful. Naming the segments A - G
+; No. Damn. But it gets us close. Naming the segments A - G
 ;
 ; A has 8 instances and IS NOT in 1
 ; B has 6 instances
