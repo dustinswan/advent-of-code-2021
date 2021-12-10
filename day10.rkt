@@ -11,7 +11,7 @@
       stack ; we've got an incomplete chunk. return the stack
       (let ([x (first input)] [xs (rest input)]) ; grab the first element of the input
         (if (member x opening) ; if it is an opening bracket
-            (go xs (cons x stack)) ; push it on the stack
+            (go xs (cons x stack)) ; push it on the stack and recurse
             (let* ([y (first stack)] ; otherwise, it's a closing bracket. grab the top of the stack..
                    [matching (second (assoc y pairs))]) ; and find its matching closing bracket
               (if (equal? matching x) ; if they match..
@@ -20,10 +20,10 @@
 
 (define part1
   (let* ([res (map (λ (x) (go x '())) data)]
-        [bads (filter (λ (x) (not (list? x))) res)] ; filter out the lists - they're the incomplete chunks
-        [costs (list (list #\) 3) (list #\] 57) (list #\} 1197) (list #\> 25137))]
-        [points (map (λ (x) (second (assoc x costs))) bads)]
-        [total (apply + points)])
+         [bads (filter (λ (x) (not (list? x))) res)] ; filter out the lists - they're the incomplete chunks
+         [costs (list (list #\) 3) (list #\] 57) (list #\} 1197) (list #\> 25137))]
+         [points (map (λ (x) (second (assoc x costs))) bads)]
+         [total (apply + points)])
     total))
 
 part1
@@ -39,7 +39,7 @@ part1
 
 (define (score chunk)
   (let ([costs (list (list #\) 1) (list #\] 2) (list #\} 3) (list #\> 4))])
-  (foldl (λ (x acc) (+ (second (assoc x costs)) (* 5 acc))) 0 chunk)))
+    (foldl (λ (x acc) (+ (second (assoc x costs)) (* 5 acc))) 0 chunk)))
 
 (define part2
   (let* ([res (map (λ (x) (go x '())) data)]
